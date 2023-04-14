@@ -4,7 +4,7 @@ namespace Myd.Platform
 {
 
     /// <summary>
-    /// Controller关于表现相关
+    /// Controller关于场景相关
     /// </summary>
     public partial class PlayerController 
     {

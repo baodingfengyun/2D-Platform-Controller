@@ -1,8 +1,5 @@
-﻿using Myd.Common;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using UnityEngine;
-using UnityEngine.Tilemaps;
 
 namespace Myd.Platform
 {

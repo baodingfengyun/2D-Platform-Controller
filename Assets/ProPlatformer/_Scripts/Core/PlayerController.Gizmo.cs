@@ -2,6 +2,9 @@
 
 namespace Myd.Platform
 {
+    /// <summary>
+    /// 辅助划线相关
+    /// </summary>
     public partial class PlayerController
     {
         public void Draw(EGizmoDrawType type)

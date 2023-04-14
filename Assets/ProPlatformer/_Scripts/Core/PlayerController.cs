@@ -12,7 +12,7 @@ namespace Myd.Platform
     }
 
     /// <summary>
-    /// 玩家操作控制器
+    /// 玩家操作控制器 [主体部分]
     /// </summary>
     public partial class PlayerController
     {
@@ -110,6 +110,10 @@ namespace Myd.Platform
 
         }
 
+        /// <summary>
+        /// 控制的主更新逻辑
+        /// </summary>
+        /// <param name="deltaTime">时间变化值</param>
         public void Update(float deltaTime)
         {
             //更新各个组件中变量的状态
@@ -232,16 +236,19 @@ namespace Myd.Platform
                 else
                     launchedTimer = 0;
 
-            }
+            } // 更新各个组件中变量的状态 << 结束
 
             //状态机更新逻辑
             stateMachine.Update(deltaTime);
+
             //更新位置
             UpdateCollideX(Speed.x * deltaTime);
             UpdateCollideY(Speed.y * deltaTime);
 
+            //更新飘动的头发
             UpdateHair(deltaTime);
 
+            //更新摄像机
             UpdateCamera(deltaTime);
         }
 

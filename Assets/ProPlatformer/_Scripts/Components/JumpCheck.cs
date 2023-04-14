@@ -8,8 +8,12 @@
         private float timer;
 
         private PlayerController controller;
+
         public float Timer => timer;
+
+        // 宽松的跳跃
         private bool jumpGrace;
+
         public JumpCheck(PlayerController playerController, bool jumpGrace)
         {
             this.controller = playerController;

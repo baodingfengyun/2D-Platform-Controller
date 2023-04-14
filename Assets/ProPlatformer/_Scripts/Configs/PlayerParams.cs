@@ -3,6 +3,9 @@ using UnityEngine;
 
 namespace Myd.Platform
 {
+    /// <summary>
+    /// 玩家可以配置的参数,与 Celeste 手感相关的参数.
+    /// </summary>
     [CreateAssetMenu(fileName = "PlayerParams", menuName = "Pro Platformer/Player Param", order = 1 )]
     public class PlayerParams : ScriptableObject
     {
