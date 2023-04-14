@@ -1,15 +1,12 @@
-using Cinemachine;
-using DG.Tweening;
-using Myd.Common;
-using Myd.Platform.Core;
 using System.Collections;
+using Myd.Platform.Core;
 using UnityEngine;
 
 
 namespace Myd.Platform
 {
     /// <summary>
-    /// ÉãÏñ»ú
+    /// åœºæ™¯æ‘„åƒæœº
     /// </summary>
     public class SceneCamera : MonoBehaviour, ICamera
     {

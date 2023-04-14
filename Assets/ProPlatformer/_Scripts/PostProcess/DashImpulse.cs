@@ -1,13 +1,11 @@
 using Cinemachine;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
 /// 
 /// </summary>
-/// 
-namespace Myd.Platform {
+namespace Myd.Platform
+{
     public class DashImpulse : MonoBehaviour
     {
         private CinemachineImpulseSource source;

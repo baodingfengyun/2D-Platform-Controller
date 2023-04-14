@@ -1,8 +1,5 @@
-﻿
-using DG.Tweening;
-using Myd.Common;
+﻿using System.Collections;
 using Myd.Platform.Core;
-using System.Collections;
 using UnityEngine;
 
 namespace Myd.Platform
@@ -14,6 +11,10 @@ namespace Myd.Platform
         Pause,  //游戏暂停
         Fail,   //游戏失败
     }
+
+    /// <summary>
+    /// 游戏玩法(GamePlay)
+    /// </summary>
     public class Game : MonoBehaviour, IGameContext
     {
         public static Game Instance;

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections;
-using UnityEngine;
-
-namespace Myd.Platform
+﻿namespace Myd.Platform
 {
     /// <summary>
     /// 跳跃检查组件

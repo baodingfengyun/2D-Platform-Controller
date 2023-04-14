@@ -1,16 +1,21 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 
 namespace Myd.Platform
 {
+    /// <summary>
+    /// 冲刺状态
+    /// </summary>
     public class DashState : BaseActionState
     {
+        /// <summary>
+        /// 冲刺方向
+        /// </summary>
         private Vector2 DashDir;
+        /// <summary>
+        /// 记录冲刺之前的速度, 冲刺结束之后需要恢复
+        /// </summary>
         private Vector2 beforeDashSpeed; 
 
         public DashState(PlayerController context) : base(EActionState.Dash, context)

@@ -1,9 +1,8 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Myd.Platform
 {
-    
+
     public class RippleEffect : MonoBehaviour
     {
         //强度

@@ -1,14 +1,12 @@
-﻿using Myd.Common;
-using System;
+﻿using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 
 namespace Myd.Platform
 {
+    /// <summary>
+    /// 爬墙状态
+    /// </summary>
     public class ClimbState : BaseActionState
     {
         public ClimbState(PlayerController context) : base(EActionState.Climb, context)

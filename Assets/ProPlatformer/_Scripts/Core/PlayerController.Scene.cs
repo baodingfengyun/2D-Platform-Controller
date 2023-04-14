@@ -1,7 +1,4 @@
-﻿
-
-using Myd.Platform.Core;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Myd.Platform
 {

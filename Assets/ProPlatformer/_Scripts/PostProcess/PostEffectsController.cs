@@ -1,10 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Myd.Platform
 {
-
     [ExecuteInEditMode, ImageEffectAllowedInSceneView]
     public class PostEffectsController : MonoBehaviour
     {

@@ -1,6 +1,4 @@
 ﻿using Myd.Platform.Core;
-using System;
-using System.Collections.Generic;
 
 namespace Myd.Platform
 {
@@ -9,7 +7,5 @@ namespace Myd.Platform
         IEffectControl EffectControl { get; }
 
         ISoundControl SoundControl { get; }
-
-
     }
 }

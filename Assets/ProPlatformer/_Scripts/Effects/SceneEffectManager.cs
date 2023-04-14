@@ -1,10 +1,6 @@
-﻿
-
-using Myd.Common;
+﻿using DG.Tweening;
 using Myd.Platform.Core;
-using System.Collections.Generic;
 using UnityEngine;
-using DG.Tweening;
 namespace Myd.Platform
 {
     /// <summary>

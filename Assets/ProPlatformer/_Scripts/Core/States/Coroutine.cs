@@ -1,16 +1,22 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Myd.Platform
 {
+	/// <summary>
+	/// 协程
+	/// </summary>
     public class Coroutine
     {
+		/// <summary>
+		/// 是否已完成
+		/// </summary>
 		public bool Finished { get; private set; }
+		/// <summary>
+		/// 是否活跃
+		/// </summary>
 		public bool Active { get; set; }
+
 		public Coroutine(IEnumerator functionCall, bool removeOnComplete = true)
 		{
 			this.enumerators = new Stack<IEnumerator>();
@@ -85,14 +91,29 @@ namespace Myd.Platform
 			this.ended = true;
 		}
 
+		/// <summary>
+		/// 结束时是否删除
+		/// </summary>
 		public bool RemoveOnComplete = true;
 
+		/// <summary>
+		/// 是否使用原始 delta 时间
+		/// </summary>
 		public bool UseRawDeltaTime;
 
+		/// <summary>
+		/// 栈
+		/// </summary>
 		private Stack<IEnumerator> enumerators;
 
+		/// <summary>
+		/// 等待时间
+		/// </summary>
 		private float waitTimer;
 
+		/// <summary>
+		/// 是否结束
+		/// </summary>
 		private bool ended;
 	}
 }

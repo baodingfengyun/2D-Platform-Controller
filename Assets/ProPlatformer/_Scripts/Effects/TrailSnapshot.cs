@@ -1,6 +1,5 @@
-﻿using Myd.Common;
-using System;
-using System.Collections;
+﻿using System;
+using Myd.Common;
 using UnityEngine;
 
 namespace Myd.Platform
