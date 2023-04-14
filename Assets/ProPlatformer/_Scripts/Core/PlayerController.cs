@@ -411,6 +411,7 @@ namespace Myd.Platform
         public float MaxFall { get => maxFall; set => maxFall = value; }
         public float DashCooldownTimer { get => dashCooldownTimer; set => dashCooldownTimer = value; }
         public float DashRefillCooldownTimer { get => dashRefillCooldownTimer; set => dashRefillCooldownTimer = value; }
+        // 最近一次的方向
         public Vector2 LastAim { get; set; }
         public Facings Facing { get; set; }  //当前朝向
         public EActionState Dash()

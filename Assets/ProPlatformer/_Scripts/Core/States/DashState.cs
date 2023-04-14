@@ -103,8 +103,13 @@ namespace Myd.Platform
             return state;
         }
 
+        /// <summary>
+        /// 冲刺过程处理
+        /// </summary>
+        /// <returns></returns>
         public override IEnumerator Coroutine()
         {
+            // 第一次返回
             yield return null;
             //
             var dir = ctx.LastAim;

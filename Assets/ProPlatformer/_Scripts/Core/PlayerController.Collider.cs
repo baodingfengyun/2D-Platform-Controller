@@ -13,14 +13,20 @@ namespace Myd.Platform
     /// </summary>
     public partial class PlayerController
     {
+        // 对标像素游戏的一个像素点
         const float STEP = 0.1f;  //碰撞检测步长，对POINT检测用
         const float DEVIATION = 0.02f;  //碰撞检测误差
 
+        // 正常碰撞盒
         private readonly Rect normalHitbox = new Rect(0, -0.25f, 0.8f, 1.1f);
+        // duckhit碰撞盒
         private readonly Rect duckHitbox = new Rect(0, -0.5f, 0.8f, 0.6f);
+        // 正常伤害碰撞盒
         private readonly Rect normalHurtbox = new Rect(0f, -0.15f, 0.8f, 0.9f);
+        // duckhurt碰撞盒
         private readonly Rect duckHurtbox = new Rect(8f, 4f, 0.8f, 0.4f);
 
+        // 碰撞盒
         private Rect collider;
 
 
@@ -34,6 +40,7 @@ namespace Myd.Platform
         public bool CollideCheck(Vector2 position, Vector2 dir, float dist = 0)
         {
             Vector2 origion = position + collider.position;
+            //检测碰撞体是否在一个盒型区域内
             return Physics2D.OverlapBox(origion + dir * (dist + DEVIATION), collider.size, 0, GroundMask);
         }
 

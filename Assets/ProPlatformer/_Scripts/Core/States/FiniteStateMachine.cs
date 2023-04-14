@@ -99,6 +99,7 @@ namespace Myd.Platform
                     return;
                 this.prevState = this.currState;
                 this.currState = value;
+                // 打印状态切换日志
                 Logging.Log($"====Enter State[{(EActionState)this.currState}],Leave State[{(EActionState)this.prevState}] ");
                 if (this.prevState != -1)
                 {
