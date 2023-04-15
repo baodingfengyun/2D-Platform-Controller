@@ -79,6 +79,7 @@ namespace Myd.Platform
             {
                 if (this.gameState == EGameState.Play)
                 {
+                    //按键更新
                     GameInput.Update(deltaTime);
                     //更新玩家逻辑数据
                     player.Update(deltaTime);

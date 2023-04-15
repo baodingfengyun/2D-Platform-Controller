@@ -9,6 +9,7 @@ namespace Myd.Platform
     [CreateAssetMenu(fileName = "PlayerParams", menuName = "Pro Platformer/Player Param", order = 1 )]
     public class PlayerParams : ScriptableObject
     {
+        //功能开关
         [Header("启用功能【墙壁下滑】")]
         public bool EnableWallSlide;
         [Header("启用功能【土狼时间】")]
