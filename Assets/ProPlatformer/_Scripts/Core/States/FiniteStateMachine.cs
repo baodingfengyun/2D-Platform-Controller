@@ -66,6 +66,8 @@ namespace Myd.Platform
         private int prevState = -1;
         //当前的协程
         private Coroutine currentCoroutine;
+        //日志开关
+        private bool m_LogSwitch = true;
 
         public FiniteStateMachine(int size)
         {
@@ -99,20 +101,37 @@ namespace Myd.Platform
                     return;
                 this.prevState = this.currState;
                 this.currState = value;
+
+                EActionState curEa = (EActionState)this.currState;
+                EActionState prevEa = (EActionState)this.prevState;
+
                 // 打印状态切换日志
-                Logging.Log($"====Enter State[{(EActionState)this.currState}],Leave State[{(EActionState)this.prevState}] ");
+                if (m_LogSwitch)
+                {
+                    Logging.Log($"====进入状态[{curEa}], 离开状态[{prevEa}]");
+                }
                 if (this.prevState != -1)
                 {
-                    Logging.Log($"====State[{(EActionState)this.prevState}] OnEnd ");
-                    this.states[this.prevState].OnEnd();
+                    if (m_LogSwitch)
+                    {
+                        Logging.Log($"====动作状态[{prevEa}] 结束");
+                    }
+                    this.states[this.prevState].OnEnd(); //结束旧状态
                 }
-                Logging.Log($"====State[{(EActionState)this.currState}] OnBegin ");
-                this.states[this.currState].OnBegin();
-                if (this.states[this.currState].IsCoroutine())
+                if (m_LogSwitch)
                 {
-                    this.currentCoroutine.Replace(this.states[this.currState].Coroutine());
+                    Logging.Log($"====动作状态[{curEa}] 开始");
+                }
+
+                S s = this.states[this.currState];
+                s.OnBegin(); //开始新状态
+                if (s.IsCoroutine())
+                {
+                    //替换
+                    this.currentCoroutine.Replace(s.Coroutine());
                     return;
                 }
+                //取消
                 this.currentCoroutine.Cancel();
             }
         }

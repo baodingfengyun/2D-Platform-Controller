@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace Myd.Platform
 {
 	/// <summary>
-	/// 协程
+	/// 协程封装, 支持栈方式管理多个协程
 	/// </summary>
     public class Coroutine
     {
@@ -72,6 +72,9 @@ namespace Myd.Platform
 			}
 		}
 
+		/// <summary>
+		/// 重置相关的控制变量.
+		/// </summary>
 		public void Cancel()
 		{
 			this.Active = false;
@@ -81,11 +84,16 @@ namespace Myd.Platform
 			this.ended = true;
 		}
 
+		/// <summary>
+		/// 用新的协程替换当前, 清空原来的数据. 从头开始执行新的协程.
+		/// </summary>
+		/// <param name="functionCall">新的协程</param>
 		public void Replace(IEnumerator functionCall)
 		{
 			this.Active = true;
 			this.Finished = false;
 			this.waitTimer = 0f;
+			//清空入栈
 			this.enumerators.Clear();
 			this.enumerators.Push(functionCall);
 			this.ended = true;

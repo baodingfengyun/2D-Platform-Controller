@@ -2,6 +2,9 @@ using UnityEngine;
 
 namespace Myd.Platform
 {
+    /// <summary>
+    /// 后期特效处理器
+    /// </summary>
     [ExecuteInEditMode, ImageEffectAllowedInSceneView]
     public class PostEffectsController : MonoBehaviour
     {
