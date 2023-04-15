@@ -40,6 +40,9 @@ namespace Myd.Platform
 
         private bool m_LogSwtich = true;
 
+        /// <summary>
+        /// 启动步骤 1
+        /// </summary>
         void Awake()
         {
             Instance = this;
@@ -50,6 +53,10 @@ namespace Myd.Platform
             Logging.Log("一开始的初始化, 进入加载状态, 创建玩家对象");
         }
 
+        /// <summary>
+        /// 启动步骤 2
+        /// </summary>
+        /// <returns></returns>
         IEnumerator Start()
         {
             yield return null;
@@ -61,6 +68,9 @@ namespace Myd.Platform
             yield return null;
         }
 
+        /// <summary>
+        /// gameplay 运行的每一帧更新
+        /// </summary>
         public void Update()
         {
             // 每帧之间的固定时间

@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Myd.Platform
 {
     /// <summary>
-    /// 这里是Unity下实现玩家表现接口
+    /// 这里是Unity下实现玩家表现(精灵控制)接口
     /// </summary>
     public class PlayerRenderer : MonoBehaviour, ISpriteControl
     {
@@ -31,7 +31,7 @@ namespace Myd.Platform
 
         public void Reload()
         {
-
+            // nothing to do
         }
 
         public void Render(float deltaTime)

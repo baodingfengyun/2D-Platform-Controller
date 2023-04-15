@@ -2,10 +2,13 @@
 
 namespace Myd.Platform
 {
+    /// <summary>
+    /// 定义角色的朝向
+    /// </summary>
     public enum Facings
     {
-        Right = 1,
-        Left = -1
+        Right = 1,  //向右
+        Left = -1   //向左
     }
 
     public struct VirtualIntegerAxis

@@ -6,6 +6,9 @@ using UnityEngine;
 
 namespace Myd.Platform
 {
+    /// <summary>
+    /// 正常动作状态
+    /// </summary>
     public class NormalState : BaseActionState
     {
         public NormalState(PlayerController controller):base(EActionState.Normal, controller)

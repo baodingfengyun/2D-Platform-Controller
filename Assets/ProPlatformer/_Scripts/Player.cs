@@ -15,9 +15,13 @@ namespace Myd.Platform
     /// </summary>
     public class Player
     {
+        // 玩家渲染器
         private PlayerRenderer playerRenderer;
+
+        // 玩家控制器
         private PlayerController playerController;
 
+        // 保留游戏上下文
         private IGameContext gameContext;
 
         public Player(IGameContext gameContext)
@@ -28,10 +32,11 @@ namespace Myd.Platform
         //加载玩家实体
         public void Reload(Bounds bounds, Vector2 startPosition)
         {
+            //实例化玩家渲染器,"Assets/ProPlatformer/_Prefabs/PlayerRenderer.prefab"
             this.playerRenderer = Object.Instantiate(Resources.Load<PlayerRenderer>("PlayerRenderer"));
-            //this.playerRenderer = AssetHelper.Create<PlayerRenderer>("Assets/ProPlatformer/_Prefabs/PlayerRenderer.prefab");
             this.playerRenderer.Reload();
-            //初始化
+
+            //实例化玩家控制器
             this.playerController = new PlayerController(playerRenderer, gameContext.EffectControl);
             this.playerController.Init(bounds, startPosition);
 

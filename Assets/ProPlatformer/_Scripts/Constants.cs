@@ -1,6 +1,7 @@
 ﻿namespace Myd.Platform
 {
     //这里涉及坐标的数值需要/10, 除时间类型
+    //主要模仿对象 Celeste 是一个像素游戏, 最小单位是 1 像素, 相当于 0.1单位.
     public static class Constants
     {
 
@@ -8,31 +9,31 @@
         public static bool EnableJumpGrace = true;
         public static bool EnableWallBoost = true;
 
-        public static float Gravity = 90f; //重力
+        public static float Gravity = 90f;          //重力(相当于 900 像素每秒)
 
         public static float HalfGravThreshold = 4f; //滞空时间阈值
-        public static float MaxFall = -16; //普通最大下落速度
-        public static float FastMaxFall = -24f;  //快速最大下落速度
-        public static float FastMaxAccel = 30f; //快速下落加速度
-        //最大移动速度
-        public static float MaxRun = 9f;
-        //Hold情况下的最大移动速度
-        public static float HoldingMaxRun = 7f;
-        //空气阻力
-        public static float AirMult = 0.65f;
-        //移动加速度
-        public static float RunAccel = 100f;
-        //移动减速度
-        public static float RunReduce = 40f;
-        //
-        public static float JumpSpeed = 10.5f;  //最大跳跃速度
-        public static float VarJumpTime = 0.2f; //跳跃持续时间(跳起时,会持续响应跳跃按键[VarJumpTime]秒,影响跳跃的最高高度);
-        public static float JumpHBoost = 4f; //退离墙壁的力
-        public static float JumpGraceTime = 0.1f;//土狼时间
+        public static float MaxFall = -16;          //普通最大下落速度
+        public static float FastMaxFall = -24f;     //快速最大下落速度
+        public static float FastMaxAccel = 30f;     //快速下落加速度
+        
+        public static float MaxRun = 9f;            //最大移动速度
+        public static float HoldingMaxRun = 7f;     //Hold情况下的最大移动速度
+        
+        public static float AirMult = 0.65f;        //空气阻力
+        public static float RunAccel = 100f;        //移动加速度
+        public static float RunReduce = 40f;        //移动减速度
+        public static float JumpSpeed = 10.5f;      //最大跳跃速度
+
+        public static float VarJumpTime = 0.2f;     //跳跃持续时间(跳起时,会持续响应
+                                                    //跳跃按键[VarJumpTime]秒,
+                                                    //影响跳跃的最高高度)
+
+        public static float JumpHBoost = 4f;        //退离墙壁的力
+        public static float JumpGraceTime = 0.1f;   //土狼时间
 
         #region WallJump
         public static float WallJumpCheckDist = 0.3f;
-        public static float WallJumpForceTime = .16f; //墙上跳跃强制时间
+        public static float WallJumpForceTime = .16f;   //墙上跳跃强制时间
         public static float WallJumpHSpeed = MaxRun + JumpHBoost;
 
         #endregion
@@ -46,8 +47,8 @@
         public static float SuperWallJumpH = MaxRun + JumpHBoost* 2;
         #endregion
         #region WallSlide
-        public static float WallSpeedRetentionTime = .06f; //撞墙以后可以允许的保持速度的时间
-        public static float WallSlideTime = 1.2f; //墙壁滑行时间
+        public static float WallSpeedRetentionTime = .06f;  //撞墙以后可以允许的保持速度的时间
+        public static float WallSlideTime = 1.2f;           //墙壁滑行时间
         public static float WallSlideStartMax = -2f;
 
 
@@ -100,5 +101,10 @@
         #endregion
 
         public static float LaunchedMinSpeedSq = 196;
+
+        #region 层级
+        public static string LAYER_GROUND = "Ground";
+        #endregion
+
     }
 }

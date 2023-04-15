@@ -26,7 +26,7 @@ namespace Myd.Platform
 
         private float dashCooldownTimer;                //冲刺冷却时间计数器，为0时，可以再次冲刺
         private float dashRefillCooldownTimer;          //
-        public int dashes;
+        public int dashes;                              //冲刺次数
         public int lastDashes;
         private float wallSpeedRetentionTimer; // If you hit a wall, start this timer. If coast is clear within this timer, retain h-speed
         private float wallSpeedRetained;
@@ -48,24 +48,32 @@ namespace Myd.Platform
         public int WallSlideDir { get; set; }
         public JumpCheck JumpCheck { get; set; }    //土狼时间
         public WallBoost WallBoost { get; set; }    //WallBoost
+
+        //有限状态机(实现了基础行为的状态)
         private FiniteStateMachine<BaseActionState> stateMachine;
 
+        //精灵控制器
         public ISpriteControl SpriteControl { get; private set; }
         //特效控制器
         public IEffectControl EffectControl { get; private set; } 
         //音效控制器
         public ISoundControl SoundControl { get; private set; }
+        //摄像机(镜头)
         public ICamera camera { get; private set; }
+
+
         public PlayerController(ISpriteControl spriteControl, IEffectControl effectControl)
         {
             this.SpriteControl = spriteControl;
             this.EffectControl = effectControl;
 
+            //将行为状态对象加入状态机进行管理
             this.stateMachine = new FiniteStateMachine<BaseActionState>((int)EActionState.Size);
             this.stateMachine.AddState(new NormalState(this));
             this.stateMachine.AddState(new DashState(this));
             this.stateMachine.AddState(new ClimbState(this));
-            this.GroundMask = LayerMask.GetMask("Ground");
+
+            this.GroundMask = LayerMask.GetMask(Constants.LAYER_GROUND);
 
             this.Facing  = Facings.Right;
             this.LastAim = Vector2.right;
@@ -418,12 +426,12 @@ namespace Myd.Platform
         public float MaxFall { get => maxFall; set => maxFall = value; }
         public float DashCooldownTimer { get => dashCooldownTimer; set => dashCooldownTimer = value; }
         public float DashRefillCooldownTimer { get => dashRefillCooldownTimer; set => dashRefillCooldownTimer = value; }
-        // 最近一次的方向
-        public Vector2 LastAim { get; set; }
+        
+        public Vector2 LastAim { get; set; } // 最近一次的动作
         public Facings Facing { get; set; }  //当前朝向
+
         public EActionState Dash()
         {
-            //wasDashB = Dashes == 2;
             this.dashes = Math.Max(0, this.dashes - 1);
             GameInput.Dash.ConsumeBuffer();
             return EActionState.Dash;
@@ -433,6 +441,7 @@ namespace Myd.Platform
             this.stateMachine.State = state;
         }
 
+        //低头(蹲下)
         public bool Ducking
         {
             get
