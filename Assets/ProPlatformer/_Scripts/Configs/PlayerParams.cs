@@ -115,6 +115,9 @@ namespace Myd.Platform
             ReloadParams();
         }
 
+        /// <summary>
+        /// 将玩家配置的值,覆盖在常量类中定义的值
+        /// </summary>
         public void ReloadParams()
         {
             Debug.Log("=======更新所有Player配置参数");
@@ -172,6 +175,8 @@ namespace Myd.Platform
             Constants.EnableWallBoost = this.EnableWallBoost; //WallBoost
 
             reloadCallback?.Invoke();
+
+            ConstantsPrinter.Print();
         }
     }
 }

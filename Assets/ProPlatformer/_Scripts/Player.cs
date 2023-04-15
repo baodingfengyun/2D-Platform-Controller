@@ -40,8 +40,8 @@ namespace Myd.Platform
             this.playerController = new PlayerController(playerRenderer, gameContext.EffectControl);
             this.playerController.Init(bounds, startPosition);
 
+            //示例化玩家参数
             PlayerParams playerParams = Resources.Load<PlayerParams>("PlayerParam");
-            //PlayerParams playerParams = AssetHelper.LoadObject<PlayerParams>("Assets/ProPlatformer/PlayerParam.asset");
             playerParams.SetReloadCallback(() => this.playerController.RefreshAbility());
             playerParams.ReloadParams();
         }

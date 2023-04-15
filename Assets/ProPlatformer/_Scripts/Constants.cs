@@ -32,24 +32,25 @@
         public static float JumpGraceTime = 0.1f;   //土狼时间
 
         #region WallJump
-        public static float WallJumpCheckDist = 0.3f;
+        public static float WallJumpCheckDist = 0.3f;   //墙上跳跃检测距离
         public static float WallJumpForceTime = .16f;   //墙上跳跃强制时间
-        public static float WallJumpHSpeed = MaxRun + JumpHBoost;
+        public static float WallJumpHSpeed = MaxRun + JumpHBoost;   //从墙上跳开的水平速度
 
         #endregion
 
         #region SuperWallJump
-        public static float SuperJumpSpeed = JumpSpeed;
-        public static float SuperJumpH = 26f;
-        public static float SuperWallJumpSpeed = 16f;
-        public static float SuperWallJumpVarTime = .25f;
-        public static float SuperWallJumpForceTime = .2f;
-        public static float SuperWallJumpH = MaxRun + JumpHBoost* 2;
+        public static float SuperJumpSpeed = JumpSpeed;     //超级跳速度
+        public static float SuperJumpH = 26f;               //超级跳水平速度
+        public static float SuperWallJumpSpeed = 16f;       //超级墙跳速度
+        public static float SuperWallJumpVarTime = .25f;    //超级墙跳水平速度
+        public static float SuperWallJumpForceTime = .2f;   //超级墙跳强制时间
+        public static float SuperWallJumpH = MaxRun + JumpHBoost* 2;    //超级墙跳
+                                                            //跳开的水平速度
         #endregion
         #region WallSlide
         public static float WallSpeedRetentionTime = .06f;  //撞墙以后可以允许的保持速度的时间
         public static float WallSlideTime = 1.2f;           //墙壁滑行时间
-        public static float WallSlideStartMax = -2f;
+        public static float WallSlideStartMax = -2f;        //墙壁下滑最大初始速度
 
 
         #endregion
@@ -64,19 +65,19 @@
         public static int DashHJumpThruNudge = 6;       //
         public static int DashCornerCorrection = 4;     //水平Dash时，遇到阻挡物的可纠正像素值
         public static int DashVFloorSnapDist = 3;       //DashAttacking下的地面吸附像素值
-        public static float DashAttackTime = .3f;       //
-        public static int MaxDashes = 1;
+        public static float DashAttackTime = .3f;       //冲刺后可攻击时间
+        public static int MaxDashes = 1;                //连续冲刺最大数
         public static float DashFreezeTime = .05f;      //冲刺开始冻帧时间
         #endregion
 
         #region Climb参数
-        public static float ClimbMaxStamina = 110;       //最大耐力
-        public static float ClimbUpCost = 100 / 2.2f;   //向上爬得耐力消耗
+        public static float ClimbMaxStamina = 110;      //最大耐力
+        public static float ClimbUpCost = 100 / 2.2f;   //向上爬的耐力消耗
         public static float ClimbStillCost = 100 / 10f; //爬着不动耐力消耗
         public static float ClimbJumpCost = 110 / 4f;   //爬着跳跃耐力消耗
         public static int ClimbCheckDist = 2;           //攀爬检查像素值
         public static int ClimbUpCheckDist = 2;         //向上攀爬检查像素值
-        public static float ClimbNoMoveTime = .1f;
+        public static float ClimbNoMoveTime = .1f;      //攀爬保持静止时间
         public static float ClimbTiredThreshold = 20f;  //表现疲惫的阈值
         public static float ClimbUpSpeed = 4.5f;        //上爬速度
         public static float ClimbDownSpeed = -8f;       //下爬速度
@@ -91,16 +92,16 @@
         #endregion
 
         #region Duck参数
-        public static float DuckFriction = 50f;
-        public static float DuckSuperJumpXMult = 1.25f;
-        public static float DuckSuperJumpYMult = .5f;
+        public static float DuckFriction = 50f;         //低头摩擦
+        public static float DuckSuperJumpXMult = 1.25f; //低头超级跳X轴速度衰减
+        public static float DuckSuperJumpYMult = .5f;   //低头超级跳Y轴速度衰减
         #endregion
 
         #region Corner Correct
         public static int UpwardCornerCorrection = 4; //向上移动，X轴上边缘校正的最大距离
         #endregion
 
-        public static float LaunchedMinSpeedSq = 196;
+        public static float LaunchedMinSpeedSq = 196; //最小航速
 
         #region 层级
         public static string LAYER_GROUND = "Ground";
