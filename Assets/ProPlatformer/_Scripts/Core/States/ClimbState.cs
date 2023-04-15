@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using Myd.Common;
 using UnityEngine;
 
 namespace Myd.Platform
@@ -23,8 +24,12 @@ namespace Myd.Platform
             return false;
         }
 
+        //进入状态
         public override void OnBegin()
         {
+            this.onStateTime = 0f;
+            this.onStateFrames = 0;
+
             ctx.Speed.x = 0;
             ctx.Speed.y *= Constants.ClimbGrabYMult;
             //TODO 其他参数
@@ -39,13 +44,21 @@ namespace Myd.Platform
 
         public override void OnEnd()
         {
-            //TODO 
+            //TODO
+            if (this.onStateTime > 0f || this.onStateFrames > 0)
+            {
+                Logging.Log("ClimbState 时间(秒):" + this.onStateTime + ", 帧数:" + this.onStateFrames);
+            }
         }
 
         public override EActionState Update(float deltaTime)
         {
+            this.onStateTime += deltaTime;
+            this.onStateFrames++;
             ctx.ClimbNoMoveTimer -= deltaTime;
+
             //处理跳跃
+            #region 攀爬中的跳跃
             if (GameInput.Jump.Pressed() && (!ctx.Ducking || ctx.CanUnDuck))
             {
                 if (ctx.MoveX == -(int)ctx.Facing)
@@ -59,15 +72,20 @@ namespace Myd.Platform
             {
                 return this.ctx.Dash();
             }
+            #endregion
+
             //放开抓取键,则回到Normal状态
+            #region 结束攀爬
             if (!GameInput.Grab.Checked())
             {
                 //Speed += LiftBoost;
                 //Play(Sfxs.char_mad_grab_letgo);
                 return EActionState.Normal;
             }
+            #endregion
 
             //检测前面的墙面是否存在
+            #region 碰撞检测
             if (!ctx.CollideCheck(ctx.Position, Vector2.right * (int)ctx.Facing))
             {
                 //Climbed over ledge?
@@ -86,7 +104,9 @@ namespace Myd.Platform
 
                 return EActionState.Normal;
             }
+            #endregion
 
+            #region 攀爬
             {
                 //Climbing
                 float target = 0;
@@ -158,11 +178,15 @@ namespace Myd.Platform
                 }
                 ctx.Speed.y = Mathf.MoveTowards(ctx.Speed.y, target, Constants.ClimbAccel * deltaTime);
             }
+            #endregion
+
             //TrySlip导致的下滑在碰到底部的时候,停止下滑
+            #region 特殊处理
             if (ctx.MoveY != -1 && ctx.Speed.y < 0 && !ctx.CollideCheck(ctx.Position, new Vector2((int)ctx.Facing, -1)))
             {
                 ctx.Speed.y = 0;
             }
+            #endregion
             //TODO Stamina
             return state;
         }

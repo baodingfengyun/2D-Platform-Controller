@@ -102,11 +102,12 @@ namespace Myd.Platform
             }
             else
             {
-                Logging.Log(Print(deltaTime));
+                //打印按键相关参数
+                //Logging.Log(Print(deltaTime));
             }
         }
 
-        public string Print(float deltaTime)
+        private string Print(float deltaTime)
         {
             return "VB[key:" + key + ", consumed:" + consumed + ", counter: "
                 + bufferCounter + " / buffer: " + bufferTime + ", deltaTime: "

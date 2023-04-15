@@ -138,7 +138,7 @@ namespace Myd.Platform
             }
             if (m_LogSwtich && freezeTime > 0f)
             {
-                Logging.Log("设置冻帧时间(秒): " + freezeTime);
+                //Logging.Log("设置冻帧时间(秒): " + freezeTime);
             }
         }
         #endregion

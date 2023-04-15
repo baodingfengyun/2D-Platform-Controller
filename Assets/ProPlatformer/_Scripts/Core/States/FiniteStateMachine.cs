@@ -28,6 +28,11 @@ namespace Myd.Platform
         /// </summary>
         protected PlayerController ctx;
 
+        //在此状态的时间
+        protected float onStateTime;
+        //统计在此状态的帧数
+        protected int onStateFrames;
+
         protected BaseActionState(EActionState state, PlayerController context)
         {
             this.state = state;
