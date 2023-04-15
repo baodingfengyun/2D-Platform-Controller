@@ -8,6 +8,7 @@ namespace Myd.Platform
     /// </summary>
     public partial class PlayerController
     {
+        //冲刺痕迹时长
         public float DashTrailTimer { get; set; }
 
         public static Vector2 NORMAL_SPRITE_SCALE = Vector2.one;

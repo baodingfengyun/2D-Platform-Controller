@@ -68,6 +68,7 @@
         public static float DashAttackTime = .3f;       //冲刺后可攻击时间
         public static int MaxDashes = 1;                //连续冲刺最大数
         public static float DashFreezeTime = .05f;      //冲刺开始冻帧时间
+        public static float DashTrailTime = .08f;       //冲刺痕迹时间
         #endregion
 
         #region Climb参数
