@@ -38,6 +38,8 @@ namespace Myd.Platform
         //游戏状态
         EGameState gameState;
 
+        private bool m_LogSwtich = true;
+
         void Awake()
         {
             Instance = this;
@@ -78,6 +80,7 @@ namespace Myd.Platform
 
         #region 冻帧
         private float freezeTime;
+        private int freezeCount; //统计实际暂停了多少帧
 
         /// <summary>
         /// 更新冻帧数据，如果不冻帧，返回true
@@ -91,6 +94,11 @@ namespace Myd.Platform
             {
                 // 取 预期(冻)帧 和 实际帧 之间的时间差, 最小值为 0
                 freezeTime = Mathf.Max(freezeTime - deltaTime, 0f);
+                freezeCount++;
+                if (m_LogSwtich && freezeTime == 0f)
+                {
+                    Logging.Log("冻帧结束, 共计暂停了 " + freezeCount + " 帧.");
+                }
                 return false;
             }
             if (Time.timeScale == 0)
@@ -100,17 +108,25 @@ namespace Myd.Platform
             return true;
         }
 
-        //冻帧
+        /// <summary>
+        /// 冻帧(外部根据情况设置时长)
+        /// </summary>
+        /// <param name="freezeTime">冻帧时长,最好是 deltaTime 的整数倍</param>
         public void Freeze(float freezeTime)
         {
             this.freezeTime = Mathf.Max(this.freezeTime, freezeTime);
             if (this.freezeTime > 0)
             {
                 Time.timeScale = 0;
+                freezeCount = 0;
             }
             else
             {
                 Time.timeScale = 1;
+            }
+            if (m_LogSwtich && freezeTime > 0f)
+            {
+                Logging.Log("设置冻帧时间(秒): " + freezeTime);
             }
         }
         #endregion

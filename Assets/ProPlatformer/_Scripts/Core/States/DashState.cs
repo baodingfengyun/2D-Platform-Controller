@@ -25,8 +25,8 @@ namespace Myd.Platform
         public override void OnBegin()
         {
             ctx.launched = false;
-            //顿帧
-            ctx.EffectControl.Freeze(0.05f);
+            // 冻帧 0.05 秒 (大约 2~3 帧)
+            ctx.EffectControl.Freeze(Constants.DashFreezeTime);
 
             ctx.WallSlideTimer = Constants.WallSlideTime;
             ctx.DashCooldownTimer = Constants.DashCooldown;

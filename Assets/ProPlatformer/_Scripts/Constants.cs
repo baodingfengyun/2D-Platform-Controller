@@ -54,8 +54,8 @@
         #endregion
 
         #region Dash相关参数
-        public static float DashSpeed = 24f;           //冲刺速度
-        public static float EndDashSpeed = 16f;        //结束冲刺速度
+        public static float DashSpeed = 24f;            //冲刺速度
+        public static float EndDashSpeed = 16f;         //结束冲刺速度
         public static float EndDashUpMult = .75f;       //如果向上冲刺，阻力。
         public static float DashTime = .15f;            //冲刺时间
         public static float DashCooldown = .2f;         //冲刺冷却时间，
@@ -65,6 +65,7 @@
         public static int DashVFloorSnapDist = 3;       //DashAttacking下的地面吸附像素值
         public static float DashAttackTime = .3f;       //
         public static int MaxDashes = 1;
+        public static float DashFreezeTime = .05f;      //冲刺开始冻帧时间
         #endregion
 
         #region Climb参数
