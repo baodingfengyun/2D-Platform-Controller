@@ -105,6 +105,9 @@ namespace Myd.Platform
         public float DuckSuperJumpXMult = 1.25f;
         public float DuckSuperJumpYMult = 0.5f;
 
+        /// <summary>
+        /// 重载参数后的回调
+        /// </summary>
         private Action reloadCallback;
         public void SetReloadCallback(Action onReload)
         {

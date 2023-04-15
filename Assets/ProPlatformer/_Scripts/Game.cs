@@ -22,6 +22,7 @@ namespace Myd.Platform
     /// </summary>
     public class Game : MonoBehaviour, IGameContext
     {
+        //GamePlay单例
         public static Game Instance;
 
         //关卡

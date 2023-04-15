@@ -37,9 +37,15 @@ namespace Myd.Platform
             this.ctx.HopWaitX = 0;
         }
 
+        /// <summary>
+        /// 正常状态下的按键处理. 分了区分区分不同的按键逻辑及优先级,采用分块标记的方式.
+        /// </summary>
+        /// <param name="deltaTime">每帧的时间变化值</param>
+        /// <returns></returns>
         public override EActionState Update(float deltaTime)
         {
-            //Climb
+            //Climb = J 攀爬逻辑处理
+            #region 攀爬
             if (GameInput.Grab.Checked() && !ctx.Ducking)
             {
                 //Climbing
@@ -50,7 +56,7 @@ namespace Myd.Platform
                         ctx.Ducking = false;
                         return EActionState.Climb;
                     }
-                    //非下坠情况，需要考虑向上攀爬吸附
+                    //非下坠情况(0 或 1)，需要考虑向上攀爬吸附
                     if (ctx.MoveY > -1)
                     {
                         bool snapped = ctx.ClimbUpSnap();
@@ -62,14 +68,18 @@ namespace Myd.Platform
                     }
                 }
             }
+            #endregion
 
-            //Dashing
+            //Dashing = K 冲刺逻辑处理
+            #region 冲刺
             if (this.ctx.CanDash)
             {
                 return this.ctx.Dash();
             }
+            #endregion
 
             //Ducking
+            #region Ducking
             if (ctx.Ducking)
             {
                 if (ctx.OnGround && ctx.MoveY != -1)
@@ -89,8 +99,10 @@ namespace Myd.Platform
                 ctx.Ducking = true;
                 ctx.PlayDuck(true);
             }
+            #endregion
 
             //水平面上移动,计算阻力
+            #region 水平面上移动,计算阻力
             if (ctx.Ducking && ctx.OnGround)
             {
                 ctx.Speed.x = Mathf.MoveTowards(ctx.Speed.x, 0, Constants.DuckFriction * deltaTime);
@@ -111,7 +123,10 @@ namespace Myd.Platform
                     ctx.Speed.x = Mathf.MoveTowards(ctx.Speed.x, max * this.ctx.MoveX, Constants.RunAccel * mult * Time.deltaTime);
                 }
             }
+            #endregion
+
             //计算竖直速度
+            #region 计算竖直速度
             {
                 //计算最大下落速度
                 {
@@ -175,7 +190,9 @@ namespace Myd.Platform
                         ctx.VarJumpTimer = 0;
                 }
             }
+            #endregion
 
+            #region 跳跃按键 空格
             if (GameInput.Jump.Pressed())
             {
                 //土狼时间范围内,允许跳跃
@@ -203,6 +220,7 @@ namespace Myd.Platform
                     }
                 }
             }
+            #endregion
 
             return state;
         }

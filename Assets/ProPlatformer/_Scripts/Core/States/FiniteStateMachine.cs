@@ -80,9 +80,13 @@ namespace Myd.Platform
             this.states[(int)state.State] = state;
         }
 
+        //状态机更新
         public void Update(float deltaTime)
         {
-            State = (int)this.states[this.currState].Update(deltaTime);
+            S s = this.states[this.currState];
+            //先更新当前状态
+            State = (int)s.Update(deltaTime);
+            //再更新协程
             if (this.currentCoroutine.Active)
             {
                 this.currentCoroutine.Update(deltaTime);

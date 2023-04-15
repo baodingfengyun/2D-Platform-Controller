@@ -119,11 +119,21 @@ namespace Myd.Platform
     /// </summary>
     public static class GameInput
     {
-        // 跳跃键: 空格
+        /// <summary>
+        /// 跳跃键: 空格
+        /// </summary>
         public static VisualButton Jump = new VisualButton(KeyCode.Space, 0.08f);
+        /// <summary>
+        /// 冲刺键: K
+        /// </summary>
         public static VisualButton Dash = new VisualButton(KeyCode.K, 0.08f);
+        /// <summary>
+        /// 抓住键: J
+        /// </summary>
         public static VisualButton Grab = new VisualButton(KeyCode.J);
+        //
         public static VirtualJoystick Aim = new VirtualJoystick();
+        //
         public static Vector2 LastAim;
 
         //根据当前朝向,决定移动方向.

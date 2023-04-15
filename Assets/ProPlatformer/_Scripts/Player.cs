@@ -46,12 +46,16 @@ namespace Myd.Platform
             playerParams.ReloadParams();
         }
 
+        //玩家更新
         public void Update(float deltaTime)
         {
+            //数据更新
             playerController.Update(deltaTime);
+            //渲染更新
             Render();
         }
 
+        //渲染
         private void Render()
         {
             playerRenderer.Render(Time.deltaTime);
@@ -74,6 +78,7 @@ namespace Myd.Platform
             this.lastFrameOnGround = this.playerController.OnGround;
         }
 
+        //最近一帧是否在地上
         private bool lastFrameOnGround;
 
         public Vector2 GetCameraPosition()

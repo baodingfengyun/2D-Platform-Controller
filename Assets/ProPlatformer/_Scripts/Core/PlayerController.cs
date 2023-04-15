@@ -79,6 +79,7 @@ namespace Myd.Platform
             this.LastAim = Vector2.right;
         }
 
+        //更新能力
         public void RefreshAbility()
         {
 
@@ -115,7 +116,7 @@ namespace Myd.Platform
             //);
 
             //this.player.SetTrailColor(gradient);
-
+            Logging.Log("玩家控制器初始化完成, bounds:" + bounds.ToString() + ", startPosition:" + startPosition);
         }
 
         /// <summary>

@@ -26,7 +26,7 @@ namespace Myd.Platform
         // 碰撞盒
         private Rect collider;
 
-
+        //位置修正
         public void AdjustPosition(Vector2 adjust)
         {
             UpdateCollideX(adjust.x);
