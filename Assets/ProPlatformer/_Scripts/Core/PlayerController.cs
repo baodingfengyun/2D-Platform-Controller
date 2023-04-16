@@ -5,12 +5,6 @@ using UnityEngine;
 
 namespace Myd.Platform
 {
-    public struct Asix
-    {
-        public float moveX;
-        public float MoveY;
-    }
-
     /// <summary>
     /// 玩家操作控制器 [主体部分]
     /// </summary>
@@ -25,7 +19,7 @@ namespace Myd.Platform
         private float fastMaxFall;
 
         private float dashCooldownTimer;                //冲刺冷却时间计数器，为0时，可以再次冲刺
-        private float dashRefillCooldownTimer;          //
+        private float dashRefillCooldownTimer;          //冲刺恢复冷却时间计数器
         public int dashes;                              //冲刺次数
         public int lastDashes;
         private float wallSpeedRetentionTimer; // If you hit a wall, start this timer. If coast is clear within this timer, retain h-speed
@@ -100,7 +94,7 @@ namespace Myd.Platform
             //根据进入的方式,决定初始状态
             this.stateMachine.State = (int)EActionState.Normal;
             this.lastDashes = this.dashes = 1;
-            this.Position = startPosition;
+            this.Position = startPosition; //设置初始位置
             this.collider = normalHitbox;
 
             this.SpriteControl.SetSpriteScale(NORMAL_SPRITE_SCALE);
@@ -157,7 +151,9 @@ namespace Myd.Platform
                 //Dash
                 {
                     if (dashCooldownTimer > 0)
+                    {
                         dashCooldownTimer -= deltaTime;
+                    }
                     if (dashRefillCooldownTimer > 0)
                     {
                         dashRefillCooldownTimer -= deltaTime;
@@ -378,11 +374,10 @@ namespace Myd.Platform
                 return true;
             }
             else
+            {
                 return false;
+            }
         }
-
-        
-        
 
         public bool CanDash
         {
@@ -402,13 +397,17 @@ namespace Myd.Platform
         /// 速度
         /// </summary>
         public Vector2 Speed;
+        /// <summary>
+        /// 位置. 最重要的参数. 初始位置是在关卡数据中的 StartPoint 设置.
+        /// </summary>
+        public Vector2 Position { get; private set; }
 
         public object Holding => null;
 
         public bool OnGround => this.onGround;
         private Color groundColor = Color.white;
         public Color GroundColor => this.groundColor;
-        public Vector2 Position { get; private set; }
+        
         //表示进入爬墙状态有0.1秒时间,不发生移动，为了让玩家看清发生了爬墙的动作
         public float ClimbNoMoveTimer { get; set; }
         public float VarJumpSpeed => this.varJumpSpeed;
