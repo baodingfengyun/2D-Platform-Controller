@@ -31,8 +31,8 @@ namespace Myd.Platform
         private float wallSpeedRetentionTimer; // If you hit a wall, start this timer. If coast is clear within this timer, retain h-speed
         private float wallSpeedRetained;
 
-        private bool onGround;
-        private bool wasOnGround;
+        private bool onGround;      // 是否在地面上
+        private bool wasOnGround;   // 之前是否在地面上
         
         public bool DashStartedOnGround { get; set; }
 
@@ -397,6 +397,10 @@ namespace Myd.Platform
             get { return this.wallSpeedRetentionTimer; }
             set { this.wallSpeedRetentionTimer = value; }
         }
+
+        /// <summary>
+        /// 速度
+        /// </summary>
         public Vector2 Speed;
 
         public object Holding => null;

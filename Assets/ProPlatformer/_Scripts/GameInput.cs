@@ -155,9 +155,12 @@ namespace Myd.Platform
             return GameInput.LastAim.normalized;
         }
 
+        //输入更新
         public static void Update(float deltaTime)
         {
+            //跳跃输入及缓存
             Jump.Update(deltaTime);
+            //冲刺输入及缓存
             Dash.Update(deltaTime);
         }
     }

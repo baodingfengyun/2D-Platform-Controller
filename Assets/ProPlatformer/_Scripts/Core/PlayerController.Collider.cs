@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Myd.Platform
@@ -33,11 +34,35 @@ namespace Myd.Platform
             UpdateCollideY(adjust.y);
         }
 
-        //碰撞检测
+        //碰撞盒的起始位置(左上角)
+        private Vector2 origin()
+        {
+            return this.Position + this.collider.position;
+        }
+
+        //判断垂直方向(上下)
+        private Vector2 dirY(float distY)
+        {
+            return Math.Sign(distY) > 0 ? Vector2.up : Vector2.down;
+        }
+
+        //判断水平方向(左右)
+        private Vector2 dirX(float distX)
+        {
+            return Math.Sign(distX) > 0 ? Vector2.right : Vector2.left;
+        }
+
+        /// <summary>
+        /// 碰撞检测
+        /// </summary>
+        /// <param name="position">位置</param>
+        /// <param name="dir">方向</param>
+        /// <param name="dist">距离</param>
+        /// <returns></returns>
         public bool CollideCheck(Vector2 position, Vector2 dir, float dist = 0)
         {
             Vector2 origion = position + collider.position;
-            //检测碰撞体是否在一个盒型区域内
+            //检查某碰撞体是否位于一个盒形区域内(中心,大小,角度,筛选器)
             return Physics2D.OverlapBox(origion + dir * (dist + DEVIATION), collider.size, 0, GroundMask);
         }
 
@@ -50,8 +75,7 @@ namespace Myd.Platform
         public bool ClimbCheck(int dir, float yAdd = 0)
         {
             //获取当前的碰撞体
-            Vector2 origion = this.Position + collider.position;
-            if (Physics2D.OverlapBox(origion + Vector2.up * (float)yAdd + Vector2.right * dir * (Constants.ClimbCheckDist * 0.1f + DEVIATION), collider.size, 0, GroundMask))
+            if (Physics2D.OverlapBox(origin() + Vector2.up * (float)yAdd + Vector2.right * dir * (Constants.ClimbCheckDist * 0.1f + DEVIATION), collider.size, 0, GroundMask))
             {
                 return true;
             } 
@@ -129,15 +153,18 @@ namespace Myd.Platform
                 }
             }
         }
+
         private bool CheckGround()
         {
             return CheckGround(Vector2.zero);
         }
-        //针对横向,进行碰撞检测.如果发生碰撞,
+
+        //针对纵向,进行碰撞检测.检测与地面的碰撞
         private bool CheckGround(Vector2 offset)
         {
-            Vector2 origion = this.Position + collider.position + offset;
-            RaycastHit2D hit = Physics2D.BoxCast(origion, collider.size, 0, Vector2.down, DEVIATION, GroundMask);
+            //从概念上说，BoxCast 就像朝特定方向拖动一个盒体穿过场景一样。在该过程中，可以检测并报告与盒体接触的任何对象。
+            //(起点,大小,角度,方向,最大投射距离,过滤器)
+            RaycastHit2D hit = Physics2D.BoxCast(origin()+offset, collider.size, 0, Vector2.down, DEVIATION, GroundMask);
             if (hit && hit.normal == Vector2.up)
             {
                 return true;
@@ -161,13 +188,8 @@ namespace Myd.Platform
         public RaycastHit2D ClimbHopSolid { get; set; }
         public RaycastHit2D CollideClimbHop(int dir)
         {
-            Vector2 origion = this.Position + collider.position;
-            RaycastHit2D hit = Physics2D.BoxCast(Position, collider.size, 0, Vector2.right * dir, DEVIATION, GroundMask);
+            RaycastHit2D hit = Physics2D.BoxCast(origin(), collider.size, 0, Vector2.right * dir, DEVIATION, GroundMask);
             return hit;
-            //if (hit && hit.normal.x == -dir)
-            //{
-
-            //}
         }
 
         public bool SlipCheck(float addY = 0)
@@ -197,9 +219,8 @@ namespace Myd.Platform
         private float MoveYStepWithCollide(float distY)
         {
             Vector2 moved = Vector2.zero;
-            Vector2 direct = Math.Sign(distY) > 0 ? Vector2.up : Vector2.down;
-            Vector2 origion = this.Position + collider.position;
-            RaycastHit2D hit = Physics2D.BoxCast(origion, collider.size, 0, direct, Mathf.Abs(distY) + DEVIATION, GroundMask);
+            Vector2 direct = dirY(distY);
+            RaycastHit2D hit = Physics2D.BoxCast(origin(), collider.size, 0, direct, Mathf.Abs(distY) + DEVIATION, GroundMask);
             if (hit && hit.normal == -direct)
             {
                 //如果发生碰撞,则移动距离
@@ -215,9 +236,8 @@ namespace Myd.Platform
         private float MoveXStepWithCollide(float distX)
         {
             Vector2 moved = Vector2.zero;
-            Vector2 direct = Math.Sign(distX) > 0 ? Vector2.right : Vector2.left;
-            Vector2 origion = this.Position + collider.position;
-            RaycastHit2D hit = Physics2D.BoxCast(origion, collider.size, 0, direct, Mathf.Abs(distX) + DEVIATION, GroundMask);
+            Vector2 direct = dirX(distX);
+            RaycastHit2D hit = Physics2D.BoxCast(origin(), collider.size, 0, direct, Mathf.Abs(distX) + DEVIATION, GroundMask);
             if (hit && hit.normal == -direct)
             {
                 //如果发生碰撞,则移动距离
@@ -232,8 +252,7 @@ namespace Myd.Platform
 
         private bool CorrectX(float distX)
         {
-            Vector2 origion = this.Position + collider.position;
-            Vector2 direct = Math.Sign(distX) > 0 ? Vector2.right : Vector2.left;
+            Vector2 direct = dirX(distX);
 
             if ((this.stateMachine.State == (int)EActionState.Dash))
             {
@@ -262,8 +281,8 @@ namespace Myd.Platform
 
         private bool CorrectY(float distY)
         {
-            Vector2 origion = this.Position + collider.position;
-            Vector2 direct = Math.Sign(distY) > 0 ? Vector2.up : Vector2.down;
+            Vector2 origion = origin();
+            Vector2 direct = dirY(distY);
             
             if (this.Speed.y < 0)
             {
@@ -352,9 +371,10 @@ namespace Myd.Platform
         //攀爬水平方向上的吸附
         public void ClimbSnap()
         {
-            Vector2 origion = this.Position + collider.position;
             Vector2 dir = Vector2.right * (int)this.Facing;
-            RaycastHit2D hit = Physics2D.BoxCast(origion, collider.size, 0, dir, Constants.ClimbCheckDist*0.1f + DEVIATION, GroundMask);
+            // 距离 = 2个像素(0.2) + 碰撞误差
+            float distance = Constants.ClimbCheckDist * 0.1f + DEVIATION;
+            RaycastHit2D hit = Physics2D.BoxCast(origin(), collider.size, 0, dir, distance, GroundMask);
             if (hit)
             {
                 //如果发生碰撞,则移动距离
@@ -373,10 +393,5 @@ namespace Myd.Platform
             //    }
             //}
         }
-
-        //public void MoveExactY(float distY)
-        //{
-        //    CorrectY(distY);
-        //}
     }
 }

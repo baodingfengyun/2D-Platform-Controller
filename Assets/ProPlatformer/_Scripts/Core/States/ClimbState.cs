@@ -30,12 +30,13 @@ namespace Myd.Platform
             this.onStateTime = 0f;
             this.onStateFrames = 0;
 
+            // 速度调整
             ctx.Speed.x = 0;
-            ctx.Speed.y *= Constants.ClimbGrabYMult;
+            ctx.Speed.y *= Constants.ClimbGrabYMult; //0.2
             //TODO 其他参数
-            ctx.WallSlideTimer = Constants.WallSlideTime;
+            ctx.WallSlideTimer = Constants.WallSlideTime; //1.2
             ctx.WallBoost?.ResetTime();
-            ctx.ClimbNoMoveTimer = Constants.ClimbNoMoveTime;
+            ctx.ClimbNoMoveTimer = Constants.ClimbNoMoveTime; //0.1
 
             //两个像素的吸附功能
             ctx.ClimbSnap();
